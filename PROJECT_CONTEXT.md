@@ -19,8 +19,9 @@ https://github.com/infoai1/spiritual-reflections
 - **Framework**: Next.js 14 (App Router)
 - **Styling**: Tailwind CSS (dark theme with gold accents)
 - **News API**: NewsAPI.org
-- **AI/RAG**: LightRAG (with GPT-4o-mini) - contains all of Maulana's books
+- **AI/RAG**: LightRAG (with **GPT-4o**) - contains all of Maulana's books
 - **LightRAG API**: https://graph.spiritualmessage.org
+- **Caching**: In-memory cache (7-day TTL) to avoid regenerating interpretations
 - **Fallback Knowledge Base**: 42 teachings in `knowledge/articles.json`
 - **Storage**: LocalStorage for favorites
 - **Deployment**: Vercel
@@ -42,8 +43,20 @@ https://github.com/infoai1/spiritual-reflections
 - **Docs**: https://graph.spiritualmessage.org/redoc
 - **WebUI**: https://graph.spiritualmessage.org/webui/documents
 - **Query Mode**: `mix` (hybrid knowledge graph + vector search)
-- **LLM**: GPT-4o-mini
+- **LLM**: GPT-4o (upgraded from gpt-4o-mini for higher quality)
 - **Embeddings**: text-embedding-3-small
+- **Config File**: `/root/LightRAG-official/.env`
+
+### Response Structure
+Two-section layout for clearer UX:
+1. **What Happened** - Simple factual summary of the news (2-3 sentences)
+2. **Spiritual Reflection** - Life-changing Tafakkur-style insights (3-4 paragraphs)
+
+### Caching
+- Interpretations cached by news ID to avoid regenerating
+- TTL: 7 days
+- In-memory Map (resets on cold start, but saves tokens within instance)
+- Cache file: `lib/cache.js`
 
 ### Fallback Behavior
 If LightRAG is unavailable, falls back to:
@@ -69,8 +82,9 @@ If LightRAG is unavailable, falls back to:
 
 ### Libraries
 - `lib/newsapi.js` - NewsAPI with stable ID generation
-- `lib/claude.js` - LightRAG `/query` integration for interpretations
+- `lib/claude.js` - LightRAG `/query` integration for life-changing interpretations
 - `lib/knowledge-base.js` - LightRAG `/query/data` for passage retrieval
+- `lib/cache.js` - In-memory caching (7-day TTL)
 - `lib/news-filter.js` - Score/filter suitable news
 - `lib/favorites.js` - LocalStorage utilities
 
@@ -121,11 +135,14 @@ All of Maulana Wahiduddin Khan's books are indexed in LightRAG, including:
 12. Daily Dose of Wisdom
 13. And many more...
 
-## Bug Fixes Applied
+## Bug Fixes & Improvements Applied
 1. **Vercel file system error**: Changed `fs.readFileSync` to direct JSON import in knowledge-base.js
 2. **Article not found**: Changed from `Date.now()` to stable hash-based IDs in newsapi.js
 3. **Repetitive reflections**: Integrated LightRAG for diverse, semantic-search based passages
 4. **Vercel can't reach localhost**: Changed LightRAG URL from localhost:9621 to https://graph.spiritualmessage.org
+5. **Token waste**: Added caching to avoid regenerating interpretations on repeat visits
+6. **Generic responses**: Upgraded to GPT-4o + life-changing Tafakkur-style prompt
+7. **Poor UX**: Added "What Happened" + "Spiritual Reflection" two-section layout
 
 ## Stable ID Generation
 ```javascript
