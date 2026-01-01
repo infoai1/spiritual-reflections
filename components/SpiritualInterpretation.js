@@ -71,7 +71,7 @@ export default function SpiritualInterpretation({
             </h4>
             <div className="space-y-4">
               {relevantPassages.map((passage, index) => (
-                <blockquote key={index} className="text-sm text-cream/70 italic border-l-2 border-gold/30 pl-4">
+                <blockquote key={index} className="passage-text text-cream/70 border-l-2 border-gold/30 pl-4">
                   "{passage.content}"
                   <footer className="text-xs text-cream/50 mt-2 not-italic">
                     — From: <span className="text-gold/70">{passage.bookName || passage.source}</span>

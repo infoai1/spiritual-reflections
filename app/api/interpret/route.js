@@ -7,6 +7,7 @@
 import { NextResponse } from 'next/server';
 import { generateInterpretation, isConfigured } from '@/lib/claude';
 import { getCached, setCache } from '@/lib/cache';
+import { getRelevantVerse } from '@/lib/quran-verses';
 
 export async function POST(request) {
   try {
@@ -24,6 +25,9 @@ export async function POST(request) {
 
     const newsId = body.id || body.title.slice(0, 50);
 
+    // Get relevant Quran verse based on news content
+    const quranVerse = getRelevantVerse(body.title, body.content || body.description || '');
+
     // Check cache first
     const cached = getCached(newsId);
     if (cached) {
@@ -32,6 +36,7 @@ export async function POST(request) {
         whatHappened: cached.whatHappened,
         interpretation: cached.interpretation,
         relevantPassages: cached.relevantPassages,
+        quranVerse,
         fromCache: true,
       });
     }
@@ -62,6 +67,7 @@ export async function POST(request) {
       whatHappened: result.whatHappened,
       interpretation: result.interpretation,
       relevantPassages: result.relevantPassages,
+      quranVerse,
       usedFallback: !!result.error,
       fromCache: false,
     });

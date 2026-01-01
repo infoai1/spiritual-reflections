@@ -13,6 +13,7 @@ export default function NewsDetailPage() {
   const [whatHappened, setWhatHappened] = useState(null);
   const [interpretation, setInterpretation] = useState(null);
   const [relevantPassages, setRelevantPassages] = useState([]);
+  const [quranVerse, setQuranVerse] = useState(null);
   const [fromCache, setFromCache] = useState(false);
   const [isLoadingNews, setIsLoadingNews] = useState(true);
   const [isLoadingInterpretation, setIsLoadingInterpretation] = useState(false);
@@ -55,6 +56,7 @@ export default function NewsDetailPage() {
               setWhatHappened(interpretData.whatHappened);
               setInterpretation(interpretData.interpretation);
               setRelevantPassages(interpretData.relevantPassages || []);
+              setQuranVerse(interpretData.quranVerse || null);
               setFromCache(interpretData.fromCache || false);
             } else {
               setError('Failed to generate interpretation');
@@ -226,13 +228,14 @@ export default function NewsDetailPage() {
       )}
 
       {/* Related Quranic Reminder */}
-      <div className="mt-12 p-6 bg-dark-card/30 rounded-xl border border-gold/10 text-center">
-        <p className="spiritual-text text-cream/70 italic">
-          "And He has subjected to you whatever is in the heavens and whatever is on the earth—
-          all from Him. Indeed in that are signs for a people who give thought."
-        </p>
-        <p className="text-gold text-sm mt-2">— Quran 45:13</p>
-      </div>
+      {quranVerse && (
+        <div className="mt-12 p-6 bg-dark-card/30 rounded-xl border border-gold/10 text-center">
+          <p className="spiritual-text text-cream/70 italic">
+            "{quranVerse.text}"
+          </p>
+          <p className="text-gold text-sm mt-2">— Quran {quranVerse.ref}</p>
+        </div>
+      )}
     </div>
   );
 }
