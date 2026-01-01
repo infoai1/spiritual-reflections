@@ -10,8 +10,10 @@ import FavoriteButton from '@/components/FavoriteButton';
 export default function NewsDetailPage() {
   const params = useParams();
   const [news, setNews] = useState(null);
+  const [whatHappened, setWhatHappened] = useState(null);
   const [interpretation, setInterpretation] = useState(null);
   const [relevantPassages, setRelevantPassages] = useState([]);
+  const [fromCache, setFromCache] = useState(false);
   const [isLoadingNews, setIsLoadingNews] = useState(true);
   const [isLoadingInterpretation, setIsLoadingInterpretation] = useState(false);
   const [error, setError] = useState(null);
@@ -50,8 +52,10 @@ export default function NewsDetailPage() {
             const interpretData = await interpretResponse.json();
 
             if (interpretData.success) {
+              setWhatHappened(interpretData.whatHappened);
               setInterpretation(interpretData.interpretation);
               setRelevantPassages(interpretData.relevantPassages || []);
+              setFromCache(interpretData.fromCache || false);
             } else {
               setError('Failed to generate interpretation');
             }
@@ -194,9 +198,11 @@ export default function NewsDetailPage() {
 
       {/* Spiritual Interpretation */}
       <SpiritualInterpretation
+        whatHappened={whatHappened}
         interpretation={interpretation || ''}
         relevantPassages={relevantPassages}
         isLoading={isLoadingInterpretation}
+        fromCache={fromCache}
       />
 
       {/* Actions */}
