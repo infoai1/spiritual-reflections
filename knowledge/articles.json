@@ -124,5 +124,161 @@
     "source": "Maulana Wahiduddin Khan",
     "content": "The news of the world, whether of scientific breakthroughs or human achievements, of natural wonders or community efforts - all can be windows to the divine. The contemplative mind transforms information into inspiration, and inspiration into spiritual elevation.",
     "themes": ["contemplation", "wisdom", "gratitude"]
+  },
+  {
+    "id": "god-arises-1",
+    "source": "Maulana Wahiduddin Khan - God Arises",
+    "content": "The existence of God can be proven through science itself. When we examine the intricate design of the universe - from the smallest atom to the largest galaxy - we find evidence of a Supreme Designer. The more science advances, the more it points to a Creator behind creation.",
+    "themes": ["faith", "nature", "wisdom"]
+  },
+  {
+    "id": "god-arises-2",
+    "source": "Maulana Wahiduddin Khan - God Arises",
+    "content": "Modern scientific discoveries do not diminish faith; they enhance it. The complexity of DNA, the fine-tuning of physical constants, the origin of life - all these mysteries point to an Intelligent Creator. Science and faith are not enemies but allies in the search for truth.",
+    "themes": ["nature", "faith", "contemplation"]
+  },
+  {
+    "id": "god-arises-3",
+    "source": "Maulana Wahiduddin Khan - God Arises",
+    "content": "The universe did not create itself. Every effect has a cause, and the ultimate cause of all existence is God. When we trace back the chain of causation, we inevitably arrive at an Uncaused Cause - the Creator who brought everything into being.",
+    "themes": ["faith", "wisdom", "nature"]
+  },
+  {
+    "id": "seekers-guide-1",
+    "source": "Maulana Wahiduddin Khan - The Seeker's Guide",
+    "content": "Who am I? Why am I here? What happens after death? These are the fundamental questions every thinking person must face. The answers to these questions determine how we live our lives. The seeker who finds God finds the answer to all questions.",
+    "themes": ["hereafter", "faith", "wisdom"]
+  },
+  {
+    "id": "seekers-guide-2",
+    "source": "Maulana Wahiduddin Khan - The Seeker's Guide",
+    "content": "The purpose of life is to recognize the Creator and prepare for the eternal life to come. This world is temporary, a place of testing. Those who pass the test by living with faith, gratitude, and righteousness will find everlasting success in the Hereafter.",
+    "themes": ["hereafter", "faith", "gratitude"]
+  },
+  {
+    "id": "seekers-guide-3",
+    "source": "Maulana Wahiduddin Khan - The Seeker's Guide",
+    "content": "True success is not measured by worldly achievements but by spiritual attainment. The one who dies with faith and good deeds is successful, regardless of their material status. The one who gains the world but loses their soul has truly failed.",
+    "themes": ["hereafter", "wisdom", "faith"]
+  },
+  {
+    "id": "islam-peace-1",
+    "source": "Maulana Wahiduddin Khan - Islam and World Peace",
+    "content": "Islam is fundamentally a religion of peace. The very word 'Islam' comes from the same root as 'Salaam' (peace). The Prophet Muhammad established peace through patience, dialogue, and wisdom - not through force. This is the model for all believers.",
+    "themes": ["peace", "wisdom", "faith"]
+  },
+  {
+    "id": "islam-peace-2",
+    "source": "Maulana Wahiduddin Khan - Islam and World Peace",
+    "content": "The Hudaybiyyah model teaches us that peace, even when it seems disadvantageous, opens doors to greater opportunities. When we choose peace unilaterally, without conditions, we create an atmosphere where hearts can change and understanding can flourish.",
+    "themes": ["peace", "patience", "wisdom"]
+  },
+  {
+    "id": "islam-peace-3",
+    "source": "Maulana Wahiduddin Khan - Islam and World Peace",
+    "content": "Violence destroys opportunities; peace creates them. When there is conflict, all constructive activities come to a halt. When there is peace, education, trade, dialogue, and spiritual growth all become possible. Peace is the prerequisite for all progress.",
+    "themes": ["peace", "wisdom", "contemplation"]
+  },
+  {
+    "id": "quran-wisdom-1",
+    "source": "Maulana Wahiduddin Khan - Essence of Quranic Wisdom",
+    "content": "The Quran is not just a book to be recited; it is a book to be understood and lived. Every verse contains wisdom for those who reflect. The Quran transforms those who engage with it sincerely, guiding them from darkness to light.",
+    "themes": ["wisdom", "contemplation", "faith"]
+  },
+  {
+    "id": "quran-wisdom-2",
+    "source": "Maulana Wahiduddin Khan - Essence of Quranic Wisdom",
+    "content": "The Quran addresses the human condition in all its aspects - spiritual, moral, social, and intellectual. It provides guidance for every situation in life. The one who makes the Quran their companion will never be lost.",
+    "themes": ["wisdom", "faith", "peace"]
+  },
+  {
+    "id": "prophet-peace-1",
+    "source": "Maulana Wahiduddin Khan - Prophet Muhammad: Messenger of Peace",
+    "content": "The Prophet Muhammad exemplified patience in the face of persecution. For thirteen years in Mecca, he and his followers endured hardship without retaliation. This patience eventually won hearts and transformed Arabia. Patience is the way of the prophets.",
+    "themes": ["patience", "peace", "faith"]
+  },
+  {
+    "id": "prophet-peace-2",
+    "source": "Maulana Wahiduddin Khan - Prophet Muhammad: Messenger of Peace",
+    "content": "When the Prophet conquered Mecca, he forgave all those who had persecuted him. This act of mercy transformed enemies into devoted followers. Forgiveness has the power to change hearts in ways that revenge never can.",
+    "themes": ["peace", "wisdom", "faith"]
+  },
+  {
+    "id": "clear-thinking-1",
+    "source": "Maulana Wahiduddin Khan - The Art of Clear Thinking",
+    "content": "Clear thinking is the foundation of spiritual development. A mind clouded by emotion, prejudice, or ignorance cannot perceive truth. The seeker must cultivate rational thought, examining beliefs critically while remaining open to divine guidance.",
+    "themes": ["wisdom", "contemplation", "faith"]
+  },
+  {
+    "id": "clear-thinking-2",
+    "source": "Maulana Wahiduddin Khan - The Art of Clear Thinking",
+    "content": "Negative thinking is a barrier to spiritual progress. When we focus on problems, we become blind to solutions. When we focus on complaints, we become blind to blessings. Positive thinking aligned with faith opens doors that negativity keeps closed.",
+    "themes": ["wisdom", "gratitude", "peace"]
+  },
+  {
+    "id": "women-islam-1",
+    "source": "Maulana Wahiduddin Khan - Women in Islam",
+    "content": "Women in Islam are spiritual equals to men. The Quran addresses both genders as believers, promising the same spiritual rewards for righteousness. The differences in social roles do not imply any difference in spiritual worth or potential.",
+    "themes": ["wisdom", "faith", "peace"]
+  },
+  {
+    "id": "reality-life-1",
+    "source": "Maulana Wahiduddin Khan - The Reality of Life",
+    "content": "This life is preparation for the next. Every moment we live is an opportunity to build our eternal future. Those who understand this reality live with purpose and intention, making choices that will benefit them beyond the grave.",
+    "themes": ["hereafter", "wisdom", "contemplation"]
+  },
+  {
+    "id": "reality-life-2",
+    "source": "Maulana Wahiduddin Khan - The Reality of Life",
+    "content": "Death is not the end but the beginning. It is the door through which we pass from the temporary to the eternal. Those who prepare for death by living righteously have nothing to fear. For them, death is a homecoming.",
+    "themes": ["hereafter", "faith", "peace"]
+  },
+  {
+    "id": "discovering-god-1",
+    "source": "Maulana Wahiduddin Khan - Discovering God",
+    "content": "God can be discovered through His signs in creation. Every flower, every star, every drop of rain is a sign pointing to the Creator. The one who learns to read these signs finds God everywhere they look.",
+    "themes": ["nature", "faith", "contemplation"]
+  },
+  {
+    "id": "discovering-god-2",
+    "source": "Maulana Wahiduddin Khan - Discovering God",
+    "content": "Discovering God is not about finding something new but about recognizing what has always been present. God's signs surround us, but only the attentive heart perceives them. Spiritual awakening is the opening of inner eyes to eternal truths.",
+    "themes": ["faith", "contemplation", "wisdom"]
+  },
+  {
+    "id": "tawhid-1",
+    "source": "Maulana Wahiduddin Khan - The Reality of Monotheism",
+    "content": "Tawhid (monotheism) is not just believing in one God; it is recognizing that all power, all authority, and all worth ultimately belong to God alone. This recognition frees us from the slavery of worldly attachments and fears.",
+    "themes": ["faith", "wisdom", "peace"]
+  },
+  {
+    "id": "tawhid-2",
+    "source": "Maulana Wahiduddin Khan - The Reality of Monotheism",
+    "content": "When we truly understand Tawhid, we realize that nothing in this world deserves our ultimate attachment. Only God is permanent; everything else is temporary. This understanding brings freedom from anxiety and attachment to worldly things.",
+    "themes": ["faith", "peace", "hereafter"]
+  },
+  {
+    "id": "spirit-islam-1",
+    "source": "Maulana Wahiduddin Khan - Spirit of Islam Magazine",
+    "content": "The spirit of Islam is mercy, compassion, and wisdom. It is seeking the pleasure of God through service to humanity. It is living with awareness of the Hereafter while fulfilling our responsibilities in this world.",
+    "themes": ["faith", "peace", "wisdom"]
+  },
+  {
+    "id": "spirit-islam-2",
+    "source": "Maulana Wahiduddin Khan - Spirit of Islam Magazine",
+    "content": "True Islamic spirituality manifests in character. The one who has truly internalized faith becomes humble, patient, grateful, and compassionate. Their very presence brings peace to those around them.",
+    "themes": ["peace", "patience", "gratitude"]
+  },
+  {
+    "id": "daily-wisdom-1",
+    "source": "Maulana Wahiduddin Khan - Daily Dose of Wisdom",
+    "content": "Each new day is a gift from God, an opportunity to grow closer to Him. Begin each morning with gratitude and end each night with reflection. In between, live with awareness that every moment is precious.",
+    "themes": ["gratitude", "contemplation", "wisdom"]
+  },
+  {
+    "id": "daily-wisdom-2",
+    "source": "Maulana Wahiduddin Khan - Daily Dose of Wisdom",
+    "content": "Small acts of kindness, patience in difficulty, gratitude in blessing - these daily practices build the spiritual character that will shine in the Hereafter. Spirituality is not in grand gestures but in consistent, sincere daily effort.",
+    "themes": ["patience", "gratitude", "hereafter"]
   }
 ]
