@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --dark-bg: #1a1a2e;
+  --dark-card: #16213e;
+  --dark-accent: #0f3460;
+  --gold: #d4af37;
+  --gold-light: #f4d03f;
+  --cream: #faf8f5;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--cream);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Elegant serif for spiritual content */
+.spiritual-text {
+  font-family: Georgia, Cambria, 'Times New Roman', serif;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+/* Gold accented heading */
+.heading-gold {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover effect */
+.news-card {
+  background-color: var(--dark-card);
+  border: 1px solid rgba(212, 175, 55, 0.1);
+  transition: all 0.3s ease;
+}
+
+.news-card:hover {
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dark-accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold);
+}
+
+/* Loading animation */
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.loading-pulse {
+  animation: pulse-gold 2s ease-in-out infinite;
+}
+
+/* Blockquote styling for interpretations */
+blockquote {
+  border-left: 3px solid var(--gold);
+  padding-left: 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+}

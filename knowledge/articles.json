@@ -1,0 +1,128 @@
+[
+  {
+    "id": "cps-sample-1",
+    "source": "CPS International",
+    "content": "Spirituality in Islam is the direct result of contemplation, the kind of intellectual development that takes place when a believer ponders over the Creator and His creation. The source, therefore, of Islamic spirituality is observation and reflection, rather than any sort of mysterious exercises. This is mind-based spirituality, derived from the Quranic principles of tafakkur (reflection), tadabbur (contemplation), and tawassum (taking lessons).",
+    "themes": ["contemplation", "wisdom", "faith"]
+  },
+  {
+    "id": "cps-sample-2",
+    "source": "CPS International",
+    "content": "The universe is like a vast book, and those who contemplate it discover the glory of its Author. Every scientific discovery is an unveiling of God's creative wisdom. When we study nature with the eye of faith, we find that the entire cosmos is designed to remind us of our Creator.",
+    "themes": ["nature", "contemplation", "wisdom"]
+  },
+  {
+    "id": "cps-sample-3",
+    "source": "Maulana Wahiduddin Khan",
+    "content": "Gratitude is not just saying thanks; it is recognizing God's blessings in every moment. When we develop this awareness, even ordinary events become extraordinary signs of divine wisdom. The grateful heart sees blessings where others see routine.",
+    "themes": ["gratitude", "faith", "wisdom"]
+  },
+  {
+    "id": "cps-sample-4",
+    "source": "Maulana Wahiduddin Khan",
+    "content": "Inner peace is something which a spiritual person holds dearer than anything else as he needs to look no further than his own inner resources for satisfaction in life. This peace comes from the awareness that we are temporary travelers in this world, and our true destination is the Hereafter.",
+    "themes": ["peace", "hereafter", "contemplation"]
+  },
+  {
+    "id": "cps-sample-5",
+    "source": "CPS International",
+    "content": "Every event in the world is a sign (Ayah) from the Creator, waiting to be understood by those who contemplate. The news we read, the discoveries scientists make, the natural phenomena we observe – all are divine messages inviting us to reflection and gratitude.",
+    "themes": ["contemplation", "nature", "gratitude"]
+  },
+  {
+    "id": "cps-sample-6",
+    "source": "Maulana Wahiduddin Khan",
+    "content": "God's creation is a vast manifestation of His wisdom and power. When we see the sun rise, the stars twinkle, or the rain fall, we are witnessing divine signs. These observations, when pondered upon with a sincere heart, lead to spiritual awakening and deeper faith.",
+    "themes": ["nature", "faith", "contemplation"]
+  },
+  {
+    "id": "cps-sample-7",
+    "source": "CPS International",
+    "content": "The Quran repeatedly calls upon humanity to observe, reflect, and understand. 'Do they not look at the sky above them?' (50:6), 'Do they not travel through the land so that they may have hearts to understand?' (22:46). Every aspect of creation is an invitation to deeper knowledge of the Creator.",
+    "themes": ["contemplation", "wisdom", "nature"]
+  },
+  {
+    "id": "cps-sample-8",
+    "source": "Maulana Wahiduddin Khan",
+    "content": "Life in this world is a test and an opportunity. Every challenge we face, every blessing we receive, every piece of news we hear – all are occasions for spiritual growth. The wise person transforms worldly experiences into stepping stones toward the eternal.",
+    "themes": ["hereafter", "wisdom", "contemplation"]
+  },
+  {
+    "id": "cps-life-1",
+    "source": "Maulana Wahiduddin Khan - CPS Life",
+    "content": "The options one has to take is not between the 'Universe without God' and the 'Universe with God', instead it is between the 'Universe with God' or 'No Universe at all.' The existence of the cosmos itself is proof of the Creator.",
+    "themes": ["faith", "wisdom", "nature"]
+  },
+  {
+    "id": "cps-life-2",
+    "source": "Maulana Wahiduddin Khan - CPS Life",
+    "content": "In his childhood, Maulana developed spiritual consciousness through nature observation, watching rivers flow and sunsets paint the sky. He learned the lesson of universal morality and saw the glory of the Creator in His creation. This became the foundation of his teaching: nature is the first teacher of spirituality.",
+    "themes": ["nature", "contemplation", "wisdom"]
+  },
+  {
+    "id": "cps-life-3",
+    "source": "Maulana Wahiduddin Khan",
+    "content": "Believers should embrace their role as 'Callers to God,' conveying divine wisdom through love and well-wishing rather than force. The message of God is spread through the heart, not through argument. When the heart speaks, other hearts listen.",
+    "themes": ["peace", "faith", "wisdom"]
+  },
+  {
+    "id": "cps-articles-1",
+    "source": "Maulana Wahiduddin Khan - The Voice of Nature",
+    "content": "Nature speaks to those who listen. The rustling of leaves, the flowing of rivers, the rising of the sun - all are voices calling humanity to recognize their Creator. The wise person hears these voices and responds with gratitude and worship.",
+    "themes": ["nature", "gratitude", "contemplation"]
+  },
+  {
+    "id": "cps-articles-2",
+    "source": "Maulana Wahiduddin Khan - Patience: A Positive Action",
+    "content": "Patience (Sabr) is not passive waiting; it is active perseverance. When we face difficulties with patience, we are engaging in one of the highest forms of worship. Every moment of patience is a step closer to spiritual elevation.",
+    "themes": ["patience", "faith", "wisdom"]
+  },
+  {
+    "id": "cps-articles-3",
+    "source": "Maulana Wahiduddin Khan - Creation Plan of God",
+    "content": "God created this world as a testing ground. Every person is being tested - not to discover what they will do, for God already knows, but to give them the opportunity to develop their spiritual potential. Life's challenges are opportunities for growth.",
+    "themes": ["hereafter", "wisdom", "faith"]
+  },
+  {
+    "id": "cps-articles-4",
+    "source": "Maulana Wahiduddin Khan - The Power of Peace",
+    "content": "Peace is the greatest enabler. When there is peace, all positive activities become possible. War and conflict destroy not just lives but opportunities for spiritual and material progress. The seeker of God must be a seeker of peace.",
+    "themes": ["peace", "wisdom", "contemplation"]
+  },
+  {
+    "id": "cps-articles-5",
+    "source": "Maulana Wahiduddin Khan - Man's Spiritual Quest",
+    "content": "Every human being is born with a spiritual vacuum that only connection with the Creator can fill. Material achievements may bring temporary satisfaction, but lasting peace comes only from recognizing one's relationship with God and living accordingly.",
+    "themes": ["faith", "peace", "hereafter"]
+  },
+  {
+    "id": "cps-articles-6",
+    "source": "Maulana Wahiduddin Khan",
+    "content": "Scientific discoveries are not threats to faith but confirmations of it. When scientists uncover the laws governing the universe, they are discovering the methods of the Creator. True knowledge leads to humility, and humility leads to God.",
+    "themes": ["nature", "wisdom", "faith"]
+  },
+  {
+    "id": "cps-articles-7",
+    "source": "Maulana Wahiduddin Khan - Fasting as Spiritual Culture",
+    "content": "Fasting teaches self-control, and self-control is the foundation of all spiritual achievement. When we control our physical desires, we strengthen our spiritual will. This discipline extends beyond Ramadan into every aspect of life.",
+    "themes": ["patience", "faith", "contemplation"]
+  },
+  {
+    "id": "cps-articles-8",
+    "source": "Maulana Wahiduddin Khan",
+    "content": "The morning breeze, the evening calm, the rain that nourishes the earth - these are not random phenomena but deliberate blessings from the Most Merciful. The aware person sees each natural event as a gift and responds with thankfulness.",
+    "themes": ["nature", "gratitude", "contemplation"]
+  },
+  {
+    "id": "cps-articles-9",
+    "source": "Maulana Wahiduddin Khan - Living in Harmony",
+    "content": "Diversity in creation is not an accident but a divine design. Different cultures, languages, and perspectives are opportunities for learning and enrichment. The spiritually mature person sees beauty in diversity and seeks common ground with all of humanity.",
+    "themes": ["peace", "wisdom", "gratitude"]
+  },
+  {
+    "id": "cps-articles-10",
+    "source": "Maulana Wahiduddin Khan",
+    "content": "The news of the world, whether of scientific breakthroughs or human achievements, of natural wonders or community efforts - all can be windows to the divine. The contemplative mind transforms information into inspiration, and inspiration into spiritual elevation.",
+    "themes": ["contemplation", "wisdom", "gratitude"]
+  }
+]
