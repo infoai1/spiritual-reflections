@@ -3,8 +3,24 @@
 import { useState, useEffect } from 'react';
 import NewsCard from '@/components/NewsCard';
 
+// Category UI configuration
+const CATEGORY_UI = {
+  inspiration: {
+    icon: '💪',
+    gradient: 'from-amber-500/10 to-orange-500/10',
+    borderColor: 'border-amber-500/30',
+    accentColor: 'text-amber-400'
+  },
+  science: {
+    icon: '🔬',
+    gradient: 'from-blue-500/10 to-purple-500/10',
+    borderColor: 'border-blue-500/30',
+    accentColor: 'text-blue-400'
+  }
+};
+
 export default function HomePage() {
-  const [news, setNews] = useState([]);
+  const [categorizedNews, setCategorizedNews] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -13,11 +29,11 @@ export default function HomePage() {
     setError(null);
 
     try {
-      const response = await fetch('/api/news?limit=12');
+      const response = await fetch('/api/news?categorized=true&limit=12');
       const data = await response.json();
 
       if (data.success) {
-        setNews(data.news);
+        setCategorizedNews(data);
       } else {
         setError(data.error || 'Failed to load news');
       }
@@ -34,7 +50,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       {/* Hero Section */}
       <section className="text-center py-8">
         <h1 className="text-3xl md:text-4xl font-bold heading-gold mb-4">
@@ -75,10 +91,7 @@ export default function HomePage() {
       {error && (
         <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-center">
           <p className="text-red-400">{error}</p>
-          <button
-            onClick={fetchNews}
-            className="mt-2 text-sm text-gold hover:underline"
-          >
+          <button onClick={fetchNews} className="mt-2 text-sm text-gold hover:underline">
             Try again
           </button>
         </div>
@@ -86,39 +99,93 @@ export default function HomePage() {
 
       {/* Loading State */}
       {isLoading && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[...Array(6)].map((_, i) => (
-            <div key={i} className="news-card rounded-xl overflow-hidden">
-              <div className="h-48 bg-cream/5 loading-pulse" />
-              <div className="p-5 space-y-3">
-                <div className="h-4 bg-cream/10 rounded loading-pulse w-1/3" />
-                <div className="h-5 bg-cream/10 rounded loading-pulse" />
-                <div className="h-5 bg-cream/10 rounded loading-pulse w-4/5" />
-                <div className="h-4 bg-cream/10 rounded loading-pulse w-full" />
-                <div className="h-4 bg-cream/10 rounded loading-pulse w-2/3" />
+        <div className="space-y-12">
+          {/* Loading skeleton for categories */}
+          {['inspiration', 'science'].map((cat) => (
+            <div key={cat} className="space-y-4">
+              <div className="h-16 bg-cream/5 rounded-xl loading-pulse" />
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="news-card rounded-xl overflow-hidden">
+                    <div className="h-48 bg-cream/5 loading-pulse" />
+                    <div className="p-5 space-y-3">
+                      <div className="h-4 bg-cream/10 rounded loading-pulse w-1/3" />
+                      <div className="h-5 bg-cream/10 rounded loading-pulse" />
+                      <div className="h-4 bg-cream/10 rounded loading-pulse w-2/3" />
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           ))}
         </div>
       )}
 
-      {/* News Grid */}
-      {!isLoading && news.length > 0 && (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {news.map((item) => (
-            <NewsCard key={item.id} news={item} showSuitability={true} />
-          ))}
-        </div>
+      {/* Categorized News */}
+      {!isLoading && categorizedNews && (
+        <>
+          {/* Category Sections */}
+          {Object.entries(categorizedNews.categories || {}).map(([categoryId, categoryData]) => {
+            const articles = categoryData?.articles || [];
+            const ui = CATEGORY_UI[categoryId] || {};
+
+            if (articles.length === 0) return null;
+
+            return (
+              <section key={categoryId} className="space-y-6">
+                {/* Category Header */}
+                <div className={`flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r ${ui.gradient} border ${ui.borderColor}`}>
+                  <span className="text-3xl">{ui.icon || categoryData.icon}</span>
+                  <div className="flex-1">
+                    <h2 className="text-xl font-semibold text-cream">{categoryData.name}</h2>
+                    <p className="text-sm text-cream/60">{categoryData.description}</p>
+                  </div>
+                  <span className="text-xs text-cream/40 bg-cream/10 px-3 py-1 rounded-full">
+                    {articles.length} {articles.length === 1 ? 'story' : 'stories'}
+                  </span>
+                </div>
+
+                {/* Category Articles */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {articles.map((item) => (
+                    <NewsCard key={item.id} news={item} showSuitability={true} />
+                  ))}
+                </div>
+              </section>
+            );
+          })}
+
+          {/* Divider */}
+          {categorizedNews.allNews && categorizedNews.allNews.length > 0 && (
+            <div className="flex items-center gap-4 my-8">
+              <div className="flex-1 h-px bg-gold/20" />
+              <span className="text-gold text-sm uppercase tracking-wide">All Spiritual Reflections</span>
+              <div className="flex-1 h-px bg-gold/20" />
+            </div>
+          )}
+
+          {/* All News Section */}
+          {categorizedNews.allNews && categorizedNews.allNews.length > 0 && (
+            <section className="space-y-6">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">&#128240;</span>
+                <h2 className="text-xl font-semibold text-cream">More Stories</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {categorizedNews.allNews.map((item) => (
+                  <NewsCard key={item.id} news={item} showSuitability={true} />
+                ))}
+              </div>
+            </section>
+          )}
+        </>
       )}
 
       {/* Empty State */}
-      {!isLoading && news.length === 0 && !error && (
+      {!isLoading && (!categorizedNews || categorizedNews.totalCount === 0) && !error && (
         <div className="text-center py-12">
           <p className="text-cream/50">No news available at the moment.</p>
-          <button
-            onClick={fetchNews}
-            className="mt-4 text-gold hover:underline"
-          >
+          <button onClick={fetchNews} className="mt-4 text-gold hover:underline">
             Try refreshing
           </button>
         </div>

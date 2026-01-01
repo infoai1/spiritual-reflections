@@ -2,10 +2,11 @@
  * Interpretation API Route
  * POST /api/interpret - Generate spiritual interpretation for a news article
  * Includes caching to avoid regenerating interpretations on each page load
+ * Now includes Executive Summary and optional Quranic Perspective
  */
 
 import { NextResponse } from 'next/server';
-import { generateInterpretation, isConfigured } from '@/lib/claude';
+import { generateInterpretation, generateQuranicPerspective, isConfigured } from '@/lib/claude';
 import { getCached, setCache } from '@/lib/cache';
 import { getRelevantVerse } from '@/lib/quran-verses';
 
@@ -24,8 +25,9 @@ export async function POST(request) {
     }
 
     const newsId = body.id || body.title.slice(0, 50);
+    const includeQuranicPerspective = body.includeQuranicPerspective !== false;
 
-    // Get relevant Quran verse based on news content
+    // Get relevant Quran verse based on news content (fallback/quick verse)
     const quranVerse = getRelevantVerse(body.title, body.content || body.description || '');
 
     // Check cache first
@@ -34,9 +36,11 @@ export async function POST(request) {
       return NextResponse.json({
         success: true,
         whatHappened: cached.whatHappened,
+        executiveSummary: cached.executiveSummary || '',
         interpretation: cached.interpretation,
         relevantPassages: cached.relevantPassages,
         quranVerse,
+        quranicPerspective: cached.quranicPerspective || null,
         fromCache: true,
       });
     }
@@ -46,28 +50,45 @@ export async function POST(request) {
       console.warn('LightRAG API not available, using fallback');
     }
 
-    // Generate interpretation
-    const result = await generateInterpretation({
+    const newsData = {
       id: body.id,
       title: body.title,
       description: body.description || '',
       content: body.content || '',
       source: body.source || 'Unknown',
-    });
+    };
+
+    // Generate interpretation (includes executiveSummary now)
+    const result = await generateInterpretation(newsData);
+
+    // Generate Quranic perspective (separate prompt) if requested
+    let quranicPerspective = null;
+    if (includeQuranicPerspective) {
+      quranicPerspective = await generateQuranicPerspective(newsData);
+
+      // Only include if found relevant content
+      if (!quranicPerspective || !quranicPerspective.found) {
+        quranicPerspective = null;
+      }
+    }
 
     // Cache the result (7 days TTL)
     setCache(newsId, {
       whatHappened: result.whatHappened,
+      executiveSummary: result.executiveSummary || '',
       interpretation: result.interpretation,
       relevantPassages: result.relevantPassages,
+      quranicPerspective,
     });
 
     return NextResponse.json({
       success: true,
       whatHappened: result.whatHappened,
+      executiveSummary: result.executiveSummary || '',
       interpretation: result.interpretation,
       relevantPassages: result.relevantPassages,
       quranVerse,
+      quranicPerspective,
       usedFallback: !!result.error,
       fromCache: false,
     });

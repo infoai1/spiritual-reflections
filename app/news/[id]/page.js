@@ -13,6 +13,8 @@ export default function NewsDetailPage() {
   const [whatHappened, setWhatHappened] = useState(null);
   const [interpretation, setInterpretation] = useState(null);
   const [relevantPassages, setRelevantPassages] = useState([]);
+  const [executiveSummary, setExecutiveSummary] = useState(null);
+  const [quranicPerspective, setQuranicPerspective] = useState(null);
   const [quranVerse, setQuranVerse] = useState(null);
   const [fromCache, setFromCache] = useState(false);
   const [isLoadingNews, setIsLoadingNews] = useState(true);
@@ -56,6 +58,8 @@ export default function NewsDetailPage() {
               setWhatHappened(interpretData.whatHappened);
               setInterpretation(interpretData.interpretation);
               setRelevantPassages(interpretData.relevantPassages || []);
+              setExecutiveSummary(interpretData.executiveSummary || null);
+              setQuranicPerspective(interpretData.quranicPerspective || null);
               setQuranVerse(interpretData.quranVerse || null);
               setFromCache(interpretData.fromCache || false);
             } else {
@@ -201,8 +205,10 @@ export default function NewsDetailPage() {
       {/* Spiritual Interpretation */}
       <SpiritualInterpretation
         whatHappened={whatHappened}
+        executiveSummary={executiveSummary}
         interpretation={interpretation || ''}
         relevantPassages={relevantPassages}
+        quranicPerspective={quranicPerspective}
         isLoading={isLoadingInterpretation}
         fromCache={fromCache}
       />
