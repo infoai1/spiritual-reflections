@@ -51,7 +51,7 @@ export default function SpiritualInterpretation({ interpretation, relevantPassag
               <blockquote key={index} className="text-sm text-cream/70 italic">
                 "{passage.content}"
                 <footer className="text-xs text-cream/50 mt-1 not-italic">
-                  — {passage.source}
+                  — From: <span className="text-gold/70">{passage.bookName || passage.source}</span>
                 </footer>
               </blockquote>
             ))}
