@@ -30,8 +30,8 @@ export async function POST(request) {
     // Get relevant Quran verse based on news content (fallback/quick verse)
     const quranVerse = getRelevantVerse(body.title, body.content || body.description || '');
 
-    // Check cache first
-    const cached = getCached(newsId);
+    // Check cache first (now async for Supabase persistence)
+    const cached = await getCached(newsId);
     if (cached) {
       return NextResponse.json({
         success: true,
@@ -72,8 +72,8 @@ export async function POST(request) {
       }
     }
 
-    // Cache the result (7 days TTL)
-    setCache(newsId, {
+    // Cache the result permanently in Supabase
+    await setCache(newsId, {
       whatHappened: result.whatHappened,
       executiveSummary: result.executiveSummary || '',
       interpretation: result.interpretation,
