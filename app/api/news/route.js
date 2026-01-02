@@ -60,11 +60,29 @@ export async function GET(request) {
             icon: NEWS_CATEGORIES.science.icon,
             articles: categorizedNews.science,
             count: categorizedNews.science.length
+          },
+          nature: {
+            id: 'nature',
+            name: NEWS_CATEGORIES.nature.name,
+            description: NEWS_CATEGORIES.nature.description,
+            icon: NEWS_CATEGORIES.nature.icon,
+            articles: categorizedNews.nature,
+            count: categorizedNews.nature.length
+          },
+          health: {
+            id: 'health',
+            name: NEWS_CATEGORIES.health.name,
+            description: NEWS_CATEGORIES.health.description,
+            icon: NEWS_CATEGORIES.health.icon,
+            articles: categorizedNews.health,
+            count: categorizedNews.health.length
           }
         },
         allNews: categorizedNews.all,
         totalCount: categorizedNews.inspiration.length +
                    categorizedNews.science.length +
+                   categorizedNews.nature.length +
+                   categorizedNews.health.length +
                    categorizedNews.all.length
       });
     }

@@ -27,49 +27,62 @@ export default function NewsDetailPage() {
       setIsLoadingNews(true);
 
       try {
-        // First, get the news article
-        const newsResponse = await fetch('/api/news?limit=20');
+        // First, try categorized news (same as home page)
+        const newsResponse = await fetch('/api/news?categorized=true&limit=20');
         const newsData = await newsResponse.json();
 
-        if (newsData.success) {
-          const article = newsData.news.find(n => n.id === params.id);
+        let article = null;
 
-          if (article) {
-            setNews(article);
-            setIsLoadingNews(false);
+        if (newsData.success && newsData.categorized) {
+          // Search in all categories
+          const allArticles = [
+            ...(newsData.categories?.inspiration?.articles || []),
+            ...(newsData.categories?.science?.articles || []),
+            ...(newsData.categories?.nature?.articles || []),
+            ...(newsData.categories?.health?.articles || []),
+            ...(newsData.allNews || [])
+          ];
+          article = allArticles.find(n => n.id === params.id);
+        } else if (newsData.success && newsData.news) {
+          // Fallback to flat news array
+          article = newsData.news.find(n => n.id === params.id);
+        }
 
-            // Now fetch the interpretation
-            setIsLoadingInterpretation(true);
-            const interpretResponse = await fetch('/api/interpret', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                id: article.id,
-                title: article.title,
-                description: article.description,
-                content: article.content,
-                source: article.source,
-              }),
-            });
-
-            const interpretData = await interpretResponse.json();
-
-            if (interpretData.success) {
-              setWhatHappened(interpretData.whatHappened);
-              setInterpretation(interpretData.interpretation);
-              setRelevantPassages(interpretData.relevantPassages || []);
-              setExecutiveSummary(interpretData.executiveSummary || null);
-              setQuranicPerspective(interpretData.quranicPerspective || null);
-              setQuranVerse(interpretData.quranVerse || null);
-              setFromCache(interpretData.fromCache || false);
-            } else {
-              setError('Failed to generate interpretation');
-            }
-          } else {
-            setError('Article not found');
-          }
-        } else {
+        if (!newsData.success) {
           setError('Failed to load news');
+        } else if (!article) {
+          setError('Article not found');
+        } else {
+          setNews(article);
+          setIsLoadingNews(false);
+
+          // Now fetch the interpretation
+          setIsLoadingInterpretation(true);
+          const interpretResponse = await fetch('/api/interpret', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: article.id,
+              title: article.title,
+              description: article.description,
+              content: article.content,
+              source: article.source,
+            }),
+          });
+
+          const interpretData = await interpretResponse.json();
+
+          if (interpretData.success) {
+            setWhatHappened(interpretData.whatHappened);
+            setInterpretation(interpretData.interpretation);
+            setRelevantPassages(interpretData.relevantPassages || []);
+            setExecutiveSummary(interpretData.executiveSummary || null);
+            setQuranicPerspective(interpretData.quranicPerspective || null);
+            setQuranVerse(interpretData.quranVerse || null);
+            setFromCache(interpretData.fromCache || false);
+          } else {
+            setError('Failed to generate interpretation');
+          }
         }
       } catch (err) {
         console.error('Error:', err);

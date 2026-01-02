@@ -1,6 +1,6 @@
 # Spiritual Reflections Project - Context Summary
 
-**Last Updated:** 2026-01-01 19:00:00
+**Last Updated:** 2026-01-02 02:00:00
 
 ## Project Overview
 A Next.js 14 application that transforms news articles into spiritual reflections in the style of Maulana Wahiduddin Khan, using LightRAG for semantic search over his literature.
@@ -11,10 +11,12 @@ A Next.js 14 application that transforms news articles into spiritual reflection
 - **AI/RAG:** LightRAG (Docker) with GPT-4o for LLM, OpenAI embeddings
 - **Database:** LightRAG's vector storage with 24,335 indexed nodes from Maulana's books
 
-## Key Features Implemented (Phase 1)
-1. **Categorized Landing Page**
+## Key Features Implemented (Phase 1 + 2)
+1. **Categorized Landing Page (4 Categories)**
    - Inspiration section (amber theme) - stories of overcoming challenges
    - Science section (blue theme) - discoveries inspiring God's remembrance
+   - Nature section (green theme) - God's signs in wildlife, oceans, forests
+   - Health section (teal theme) - blessings of well-being and healing
    - Quality scoring algorithm for best articles
 
 2. **Executive Summary ("In Brief")**
@@ -27,6 +29,10 @@ A Next.js 14 application that transforms news articles into spiritual reflection
 4. **Quranic Perspective Section**
    - Concept name + Arabic + meaning
    - Related verses with connections (if found)
+
+5. **Bug Fix: Article Not Found**
+   - Detail page now fetches categorized news (same as home page)
+   - Searches across all categories to find the clicked article
 
 ## File Structure
 ```
@@ -75,8 +81,7 @@ A Next.js 14 application that transforms news articles into spiritual reflection
 
 ## Pending Tasks
 - [ ] Test Gemini 3 Pro integration (model available but needs embedding compatibility)
-- [ ] User news submission feature (Phase 2)
-- [ ] More categories (Nature, Health)
+- [ ] User news submission feature (Phase 3)
 
 ## API Keys (stored in .env files)
 - OpenAI: For LLM + embeddings

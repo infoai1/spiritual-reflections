@@ -16,6 +16,18 @@ const CATEGORY_UI = {
     gradient: 'from-blue-500/10 to-purple-500/10',
     borderColor: 'border-blue-500/30',
     accentColor: 'text-blue-400'
+  },
+  nature: {
+    icon: '🌿',
+    gradient: 'from-green-500/10 to-emerald-500/10',
+    borderColor: 'border-green-500/30',
+    accentColor: 'text-green-400'
+  },
+  health: {
+    icon: '💚',
+    gradient: 'from-teal-500/10 to-cyan-500/10',
+    borderColor: 'border-teal-500/30',
+    accentColor: 'text-teal-400'
   }
 };
 
@@ -101,7 +113,7 @@ export default function HomePage() {
       {isLoading && (
         <div className="space-y-12">
           {/* Loading skeleton for categories */}
-          {['inspiration', 'science'].map((cat) => (
+          {['inspiration', 'science', 'nature', 'health'].map((cat) => (
             <div key={cat} className="space-y-4">
               <div className="h-16 bg-cream/5 rounded-xl loading-pulse" />
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
