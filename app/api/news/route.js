@@ -2,21 +2,65 @@
  * News API Route
  * GET /api/news - Fetch and filter news suitable for spiritual interpretation
  * GET /api/news?categorized=true - Fetch categorized news (Inspiration, Science, All)
+ * GET /api/news?id=<articleId> - Get single article by ID (for shared links)
  *
- * Priority: Supabase (curated) > NewsAPI (fresh)
+ * Priority: Supabase (curated/saved) > NewsAPI (fresh)
  */
 
 import { NextResponse } from 'next/server';
 import { fetchNews, fetchCategorizedNews } from '@/lib/newsapi';
 import { filterNews, filterAndCategorizeNews } from '@/lib/news-filter';
 import { NEWS_CATEGORIES } from '@/lib/categories';
-import { getApprovedArticles, isSupabaseConfigured } from '@/lib/supabase';
+import { getApprovedArticles, getArticleById, autoSaveArticle, isSupabaseConfigured } from '@/lib/supabase';
 
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const limit = parseInt(searchParams.get('limit') || '10');
     const categorized = searchParams.get('categorized') === 'true';
+    const articleId = searchParams.get('id');
+
+    // Single article lookup mode (for shared links)
+    if (articleId) {
+      // First: Check Supabase for saved article
+      const savedArticle = await getArticleById(articleId);
+      if (savedArticle) {
+        return NextResponse.json({
+          success: true,
+          source: 'database',
+          article: savedArticle
+        });
+      }
+
+      // Second: Search in current news feed
+      const rawNews = await fetchCategorizedNews({ perCategory: 5, forAllSection: 20 });
+      const allCurrentArticles = [
+        ...rawNews.inspiration,
+        ...rawNews.science,
+        ...rawNews.nature,
+        ...rawNews.health,
+        ...rawNews.all
+      ];
+
+      const foundArticle = allCurrentArticles.find(a => a.id === articleId);
+      if (foundArticle) {
+        // Auto-save for future access (fire and forget)
+        autoSaveArticle(foundArticle).catch(() => {});
+
+        return NextResponse.json({
+          success: true,
+          source: 'newsapi',
+          article: foundArticle
+        });
+      }
+
+      // Article not found anywhere
+      return NextResponse.json({
+        success: false,
+        error: 'Article not found',
+        message: 'This article may no longer be available'
+      }, { status: 404 });
+    }
 
     // Try Supabase first for curated content
     if (isSupabaseConfigured()) {

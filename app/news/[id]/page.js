@@ -27,31 +27,15 @@ export default function NewsDetailPage() {
       setIsLoadingNews(true);
 
       try {
-        // First, try categorized news (same as home page)
-        const newsResponse = await fetch('/api/news?categorized=true&limit=20');
+        // Direct article lookup by ID (checks Supabase first, then NewsAPI)
+        // Articles are auto-saved on first view for link persistence
+        const newsResponse = await fetch(`/api/news?id=${encodeURIComponent(params.id)}`);
         const newsData = await newsResponse.json();
 
-        let article = null;
+        let article = newsData.article || null;
 
-        if (newsData.success && newsData.categorized) {
-          // Search in all categories
-          const allArticles = [
-            ...(newsData.categories?.inspiration?.articles || []),
-            ...(newsData.categories?.science?.articles || []),
-            ...(newsData.categories?.nature?.articles || []),
-            ...(newsData.categories?.health?.articles || []),
-            ...(newsData.allNews || [])
-          ];
-          article = allArticles.find(n => n.id === params.id);
-        } else if (newsData.success && newsData.news) {
-          // Fallback to flat news array
-          article = newsData.news.find(n => n.id === params.id);
-        }
-
-        if (!newsData.success) {
-          setError('Failed to load news');
-        } else if (!article) {
-          setError('Article not found');
+        if (!newsData.success || !article) {
+          setError('This article is no longer available. It may have been removed from the news feed.');
         } else {
           setNews(article);
           setIsLoadingNews(false);
