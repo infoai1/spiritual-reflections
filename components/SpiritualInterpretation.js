@@ -1,5 +1,8 @@
 'use client';
 
+import { useState } from 'react';
+import CitationModal from './CitationModal';
+
 export default function SpiritualInterpretation({
   whatHappened,
   executiveSummary,
@@ -9,6 +12,8 @@ export default function SpiritualInterpretation({
   isLoading = false,
   fromCache = false
 }) {
+  const [selectedPassage, setSelectedPassage] = useState(null);
+
   if (isLoading) {
     return (
       <div className="bg-dark-card rounded-xl p-6 border border-gold/20">
@@ -78,7 +83,7 @@ export default function SpiritualInterpretation({
           ))}
         </div>
 
-        {/* Related Teachings (if any) */}
+        {/* Related Teachings (if any) - Now with clickable citations */}
         {relevantPassages.length > 0 && (
           <div className="mt-8 pt-6 border-t border-gold/10">
             <h4 className="text-sm font-medium text-gold mb-4 flex items-center gap-2">
@@ -89,7 +94,15 @@ export default function SpiritualInterpretation({
                 <blockquote key={index} className="passage-text text-cream/70 border-l-2 border-gold/30 pl-4">
                   "{passage.content}"
                   <footer className="text-xs text-cream/50 mt-2 not-italic">
-                    — From: <span className="text-gold/70">{passage.bookName || passage.source}</span>
+                    — From:{' '}
+                    <button
+                      onClick={() => setSelectedPassage(passage)}
+                      className="text-gold/70 hover:text-gold hover:underline transition-colors cursor-pointer inline-flex items-center gap-1"
+                      title="Click to view full passage and source"
+                    >
+                      {passage.bookName || passage.source}
+                      <span className="text-xs">📖</span>
+                    </button>
                   </footer>
                 </blockquote>
               ))}
@@ -172,6 +185,13 @@ export default function SpiritualInterpretation({
           )}
         </div>
       )}
+
+      {/* Citation Modal */}
+      <CitationModal
+        passage={selectedPassage}
+        isOpen={!!selectedPassage}
+        onClose={() => setSelectedPassage(null)}
+      />
     </div>
   );
 }
