@@ -158,6 +158,14 @@ A Next.js 14 application that transforms news articles into spiritual reflection
 | status | VARCHAR | pending/approved/rejected |
 | fetched_at | TIMESTAMPTZ | When fetched |
 
+### Table: `interpretation_cache`
+| Column | Type | Description |
+|--------|------|-------------|
+| id | UUID | Primary key |
+| news_id | VARCHAR(255) | Unique news article ID |
+| interpretation_data | JSONB | Cached interpretation (permanent) |
+| created_at | TIMESTAMPTZ | When cached |
+
 ## Environment Variables
 
 ### Required for Public Site
@@ -189,7 +197,7 @@ SUPABASE_SERVICE_ROLE_KEY=<service role key>
 
 ## Recent Updates (2026-01-02)
 
-### Session Accomplishments
+### Session 1 Accomplishments
 - [x] Fixed "Article not found" bug on detail page
 - [x] Added Nature category (green theme)
 - [x] Added Health category (teal theme)
@@ -199,10 +207,21 @@ SUPABASE_SERVICE_ROLE_KEY=<service role key>
 - [x] Created queue system for AI-curated news approval
 - [x] Added URL metadata extraction for easy article import
 - [x] Modified news API to prioritize curated content
-- [x] Deployed all changes to Vercel
+
+### Session 2 Accomplishments
+- [x] Fixed garbage passages in "Wisdom from Maulana's Books" section
+  - Enhanced quality filtering to reject book metadata, indexes, table of contents
+  - Filter embedded page numbers (like "141animals")
+  - Require meaningful spiritual vocabulary
+  - Truncate passages to ~300 chars at sentence boundaries
+- [x] Implemented persistent interpretation caching via Supabase
+  - Interpretations now cached permanently (saves API costs!)
+  - Falls back to in-memory when Supabase not configured
 
 ### Git Commits
 ```
+0df77a3 - Add persistent Supabase caching for interpretations
+60f0eac - Fix garbage passages in Wisdom from Maulana's Books section
 a763098 - Add admin panel for curating news content
 5d8a1bb - Add Nature & Health categories, fix Article not found bug
 ```
