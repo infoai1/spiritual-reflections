@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.2",
+    "@supabase/supabase-js": "^2.89.0",
     "autoprefixer": "^10.4.23",
     "next": "^14.2.35",
     "postcss": "^8.5.6",
