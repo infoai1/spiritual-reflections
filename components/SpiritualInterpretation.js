@@ -1,18 +1,119 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import CitationModal from './CitationModal';
+import BookViewerPanel from './BookViewerPanel';
+
+/**
+ * Parse interpretation text and replace [citation:N.O] with clickable elements
+ */
+function ParsedInterpretation({ text, citations = [], onCitationClick }) {
+  const parsed = useMemo(() => {
+    if (!text || citations.length === 0) {
+      return text ? text.split('\n\n').map((p, i) => <p key={i} className="leading-relaxed text-[1.05rem]">{p}</p>) : null;
+    }
+
+    // Match [citation:N.O] pattern
+    const citationPattern = /\[citation:(\d+\.\d+)\]/g;
+    const parts = [];
+    let lastIndex = 0;
+    let match;
+
+    while ((match = citationPattern.exec(text)) !== null) {
+      const citationId = match[1];
+      const citation = citations.find(c => c.id === citationId);
+
+      // Add text before citation
+      if (match.index > lastIndex) {
+        parts.push(
+          <span key={`text-${lastIndex}`}>
+            {text.substring(lastIndex, match.index)}
+          </span>
+        );
+      }
+
+      // Add citation button
+      if (citation) {
+        const sourceNum = citation.sourceId || citationId.split('.')[0];
+        parts.push(
+          <button
+            key={`citation-${citationId}-${match.index}`}
+            onClick={() => onCitationClick(citation)}
+            className="inline-flex items-center justify-center w-5 h-5 text-[10px] font-semibold text-dark-bg bg-gold rounded-full hover:bg-gold/80 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-1 focus:ring-offset-dark-bg transition-colors mx-0.5 align-middle"
+            title={`Source: ${citation.bookName || citation.source}`}
+          >
+            {sourceNum}
+          </button>
+        );
+      } else {
+        // Citation not found, show as text
+        parts.push(<span key={`missing-${citationId}`}>[{citationId}]</span>);
+      }
+
+      lastIndex = match.index + match[0].length;
+    }
+
+    // Add remaining text
+    if (lastIndex < text.length) {
+      parts.push(
+        <span key="text-final">
+          {text.substring(lastIndex)}
+        </span>
+      );
+    }
+
+    // Split into paragraphs while preserving citation buttons
+    // This is a simplified approach - we render it as a single block with preserved newlines
+    return (
+      <div className="leading-relaxed text-[1.05rem] whitespace-pre-wrap">
+        {parts}
+      </div>
+    );
+  }, [text, citations, onCitationClick]);
+
+  return parsed;
+}
 
 export default function SpiritualInterpretation({
   whatHappened,
   executiveSummary,
   interpretation,
   relevantPassages = [],
+  inlineCitations = [],
   quranicPerspective = null,
   isLoading = false,
   fromCache = false
 }) {
   const [selectedPassage, setSelectedPassage] = useState(null);
+  const [showBookViewer, setShowBookViewer] = useState(false);
+  const [showCitationModal, setShowCitationModal] = useState(false);
+
+  // Handle citation click - try BookViewerPanel first, fallback to CitationModal
+  const handleCitationClick = (passage) => {
+    setSelectedPassage(passage);
+    // If passage has a bookSlug, try to open in BookViewerPanel first
+    if (passage.bookSlug) {
+      setShowBookViewer(true);
+      setShowCitationModal(false);
+    } else {
+      // No bookSlug available, show CitationModal directly
+      setShowBookViewer(false);
+      setShowCitationModal(true);
+    }
+  };
+
+  // Handle fallback from BookViewerPanel to CitationModal
+  const handleBookViewerFallback = () => {
+    setShowBookViewer(false);
+    setShowCitationModal(true);
+  };
+
+  // Close all modals
+  const handleCloseModals = () => {
+    setSelectedPassage(null);
+    setShowBookViewer(false);
+    setShowCitationModal(false);
+  };
 
   if (isLoading) {
     return (
@@ -74,13 +175,13 @@ export default function SpiritualInterpretation({
           </div>
         </div>
 
-        {/* Interpretation */}
+        {/* Interpretation with inline citations */}
         <div className="spiritual-text text-cream/90 space-y-4">
-          {interpretation.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="leading-relaxed text-[1.05rem]">
-              {paragraph}
-            </p>
-          ))}
+          <ParsedInterpretation
+            text={interpretation}
+            citations={inlineCitations}
+            onCitationClick={handleCitationClick}
+          />
         </div>
 
         {/* Related Teachings (if any) - Now with clickable citations */}
@@ -96,7 +197,7 @@ export default function SpiritualInterpretation({
                   <footer className="text-xs text-cream/50 mt-2 not-italic">
                     — From:{' '}
                     <button
-                      onClick={() => setSelectedPassage(passage)}
+                      onClick={() => handleCitationClick(passage)}
                       className="text-gold/70 hover:text-gold hover:underline transition-colors cursor-pointer inline-flex items-center gap-1"
                       title="Click to view full passage and source"
                     >
@@ -186,11 +287,22 @@ export default function SpiritualInterpretation({
         </div>
       )}
 
-      {/* Citation Modal */}
+      {/* Book Viewer Panel (for books in Islamic Demo database) */}
+      {selectedPassage?.bookSlug && (
+        <BookViewerPanel
+          isOpen={showBookViewer}
+          onClose={handleCloseModals}
+          bookSlug={selectedPassage.bookSlug}
+          highlightQuote={selectedPassage.highlightedQuote}
+          onFallback={handleBookViewerFallback}
+        />
+      )}
+
+      {/* Citation Modal (fallback for books not in database) */}
       <CitationModal
         passage={selectedPassage}
-        isOpen={!!selectedPassage}
-        onClose={() => setSelectedPassage(null)}
+        isOpen={showCitationModal}
+        onClose={handleCloseModals}
       />
     </div>
   );

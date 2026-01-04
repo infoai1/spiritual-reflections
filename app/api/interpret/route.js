@@ -39,6 +39,7 @@ export async function POST(request) {
         executiveSummary: cached.executiveSummary || '',
         interpretation: cached.interpretation,
         relevantPassages: cached.relevantPassages,
+        inlineCitations: cached.inlineCitations || [],
         quranVerse,
         quranicPerspective: cached.quranicPerspective || null,
         fromCache: true,
@@ -78,6 +79,7 @@ export async function POST(request) {
       executiveSummary: result.executiveSummary || '',
       interpretation: result.interpretation,
       relevantPassages: result.relevantPassages,
+      inlineCitations: result.inlineCitations || [],
       quranicPerspective,
     });
 
@@ -87,6 +89,7 @@ export async function POST(request) {
       executiveSummary: result.executiveSummary || '',
       interpretation: result.interpretation,
       relevantPassages: result.relevantPassages,
+      inlineCitations: result.inlineCitations || [],
       quranVerse,
       quranicPerspective,
       usedFallback: !!result.error,
