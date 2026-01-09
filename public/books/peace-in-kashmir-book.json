@@ -1,0 +1,92 @@
+{
+  "book_metadata": {
+    "title": "Peace in Kashmir",
+    "author": "Maulana Wahiduddin Khan",
+    "slug": "peace-in-kashmir-book",
+    "total_chapters": 5,
+    "total_paragraphs": 20,
+    "total_groups": 8
+  },
+  "groups": [
+    {
+      "group_id": "g_001",
+      "para_ids": ["p_009", "p_010", "p_011"],
+      "combined_text": "Introduction\n\nI HAVE BEEN writing about Kashmir since 1968. From the very outset I have been of the firm view that unrealistic politics has played havoc with Kashmir, but that now through realistic politics we can once again lead Kashmir to progress and development.\n\nKashmiri Muslims have today become disillusioned. They are living in an atmosphere of mistrust. The aim of this book is to assist them to emerge from the disillusionment, and to start afresh with new-found courage and confidence.",
+      "token_count": 110,
+      "chapter": "Introduction",
+      "page_start": 3,
+      "page_end": 3
+    },
+    {
+      "group_id": "g_002",
+      "para_ids": ["p_012", "p_013", "p_014"],
+      "combined_text": "It is indeed possible for the Kashmiris to start a new life at any given time, but for this, two conditions must be met.\n\nFirst, they must hold themselves responsible for the unpleasant situation they are faced with today. As long as they continue to hold others responsible for it, it will be almost impossible for them to make a new start.\n\nSecond, more importantly, they must come out of their dream world and learn to live in the world of practical realities. They must abandon the wishful thinking their incompetent leaders have fed them on.",
+      "token_count": 120,
+      "chapter": "Introduction",
+      "page_start": 4,
+      "page_end": 4
+    },
+    {
+      "group_id": "g_003",
+      "para_ids": ["p_015", "p_016"],
+      "combined_text": "For their growth and advancement to take place, they must carve out a new plan of adjustment with the present situation. Admitting the existing realities, the Kashmiri Muslims must arrive at the brave decision—willingly and not out of compulsion—that destiny has decreed that they should be a part of India. They have no option but to willingly accept this verdict of destiny.\n\nFurthermore, this is not an evil. It is certainly, in every respect, good for them. India is a big country. It has freedom and democracy.",
+      "token_count": 105,
+      "chapter": "Introduction",
+      "page_start": 5,
+      "page_end": 5
+    },
+    {
+      "group_id": "g_004",
+      "para_ids": ["p_017", "p_018", "p_019"],
+      "combined_text": "Kashmiri Leadership\n\nI HAVE BEEN thinking of the issue of Kashmir since its beginning. By the grace of God, the view I initially formed on this issue appears correct to me even today. I have never felt the need to change it.\n\nI have been writing about Kashmir since 1968. My first article was published in the Urdu Weekly, Al-Jamiat, the official organ of the Jamiat ul Ulema-i-Hind.",
+      "token_count": 95,
+      "chapter": "Kashmiri Leadership",
+      "page_start": 8,
+      "page_end": 8
+    },
+    {
+      "group_id": "g_005",
+      "para_ids": ["p_020", "p_021"],
+      "combined_text": "Since then I have been writing on the Kashmir issue over the years. If my writings for the last 35 years were to be collected, they would form a voluminous book.\n\nBy God's grace my writings have benefited a great number of Kashmiris, who, in consequence, have abandoned the path of militancy in favour of education and progress. I constantly receive letters and phone calls from Kashmiris telling me of the change in their thinking.",
+      "token_count": 90,
+      "chapter": "Kashmiri Leadership",
+      "page_start": 9,
+      "page_end": 9
+    },
+    {
+      "group_id": "g_006",
+      "para_ids": ["p_022", "p_023", "p_024"],
+      "combined_text": "Lessons from Nature\n\nTHE ARMED UPRISING in Kashmir against India began in October 1989. Just a month before this, I visited Kashmir, where I had to address a large gathering at the Tagore Hall in Srinagar.\n\nOn the same trip I met with numerous Kashmiris. One day, I went with a group of Kashmiri Muslims to an open valley just outside Srinagar. All around were beautiful scenes of nature. From the towering peaks rivulets were cascading down the valley.",
+      "token_count": 100,
+      "chapter": "Lessons from Nature",
+      "page_start": 12,
+      "page_end": 12
+    },
+    {
+      "group_id": "g_007",
+      "para_ids": ["p_025", "p_026"],
+      "combined_text": "As I sat on the banks of a stream alongwith my Kashmiri acquaintances, I noticed the way the stream flowed till it arrived at a boulder. It did not try to break the rock to be able to move ahead. Rather, when it met the rock, it simply swerved to the left or to the right, around the sides of the rock, and kept on with its journey uninterrupted.\n\nThis is an inevitable happening with all streams and rivers, but when a foolhardy man finds a 'boulder' blocking his path, he wants to smash it so that he can forge ahead, even if that results in his journey coming to an abrupt end once and for all.",
+      "token_count": 130,
+      "chapter": "Lessons from Nature",
+      "page_start": 13,
+      "page_end": 13
+    },
+    {
+      "group_id": "g_008",
+      "para_ids": ["p_027", "p_028"],
+      "combined_text": "Be Realistic\n\nIN APRIL 1986, a group of Sikhs got together in Amritsar and declared what they called the independent state of Khalistan. At this time I wrote an article in the Hindustan Times, captioned 'Acceptance of Reality'.\n\nThis article was about the situation in Punjab and Kashmir. Addressing the people of Punjab and Kashmir, I warned them that the movements for an independent Punjab and an independent Kashmir would never succeed. I said that such movements were tantamount to breaking one's head against the boulder of reality.",
+      "token_count": 115,
+      "chapter": "Be Realistic",
+      "page_start": 18,
+      "page_end": 18
+    }
+  ],
+  "structure": [],
+  "statistics": {
+    "total_quran_refs": 0,
+    "total_hadith_refs": 0,
+    "reviewed_paragraphs": 20,
+    "total_paragraphs": 20,
+    "completion_percentage": 100
+  }
+}

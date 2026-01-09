@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import GroupCitationPanel from '@/components/GroupCitationPanel';
+import CitationPanel from '@/components/CitationPanel';
 
 // Sample book JSON matching annotation tool export format
 const sampleBookJson = {
@@ -9,8 +9,8 @@ const sampleBookJson = {
     title: "Peace in Kashmir",
     author: "Maulana Wahiduddin Khan",
     slug: "peace-in-kashmir",
-    total_chapters: 3,
-    total_paragraphs: 12,
+    total_chapters: 4,
+    total_paragraphs: 16,
     total_groups: 4
   },
   groups: [
@@ -62,7 +62,8 @@ export default function TestCitationPage() {
   return (
     <div className="min-h-screen bg-dark-bg p-8">
       <div className="max-w-2xl mx-auto">
-        <h1 className="text-2xl font-bold text-gold mb-6">GroupCitationPanel Test</h1>
+        <h1 className="text-2xl font-bold text-gold mb-2">Book Components Test</h1>
+        <p className="text-cream/60 mb-6">Test CitationPanel (modal) and BookReader (full page)</p>
 
         <div className="space-y-4 mb-8">
           <div>
@@ -91,12 +92,21 @@ export default function TestCitationPage() {
             />
           </div>
 
-          <button
-            onClick={() => setIsOpen(true)}
-            className="w-full bg-gold text-dark-bg font-bold py-3 px-4 rounded-lg hover:bg-gold/90 transition-colors"
-          >
-            Open Citation Panel
-          </button>
+          <div className="grid grid-cols-2 gap-4">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="bg-gold text-dark-bg font-bold py-3 px-4 rounded-lg hover:bg-gold/90 transition-colors"
+            >
+              Open CitationPanel
+            </button>
+
+            <a
+              href="/read/peace-in-kashmir-book"
+              className="bg-cream/10 text-cream font-bold py-3 px-4 rounded-lg hover:bg-cream/20 transition-colors text-center"
+            >
+              Open BookReader
+            </a>
+          </div>
         </div>
 
         <div className="bg-dark-card rounded-lg p-4 border border-gold/20">
@@ -105,14 +115,26 @@ export default function TestCitationPage() {
             {JSON.stringify(sampleBookJson.groups.find(g => g.group_id === selectedGroup), null, 2)}
           </pre>
         </div>
+
+        <div className="mt-6 p-4 bg-cream/5 rounded-lg border border-cream/10">
+          <h3 className="text-sm font-semibold text-cream/80 mb-2">Component Architecture:</h3>
+          <pre className="text-xs text-cream/50">
+{`BookViewer (core)
+  ├── CitationPanel (modal wrapper)
+  └── BookReader (full page + TOC)
+
+/read/[slug] → BookReader`}
+          </pre>
+        </div>
       </div>
 
-      <GroupCitationPanel
+      <CitationPanel
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         groupId={selectedGroup}
         searchText={searchText}
         bookJson={sampleBookJson}
+        pdfUrl="/books/peace-in-kashmir-book.pdf"
       />
     </div>
   );
