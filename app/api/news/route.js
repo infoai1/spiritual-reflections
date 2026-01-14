@@ -11,7 +11,7 @@ import { NextResponse } from 'next/server';
 import { fetchNews, fetchCategorizedNews } from '@/lib/newsapi';
 import { filterNews, filterAndCategorizeNews } from '@/lib/news-filter';
 import { NEWS_CATEGORIES } from '@/lib/categories';
-import { getApprovedArticles, getArticleById, autoSaveArticle, isSupabaseConfigured } from '@/lib/supabase';
+import { getApprovedArticles, getArticleById, getArticleWithAI, getApprovedArticlesWithAI, autoSaveArticle, isSupabaseConfigured } from '@/lib/supabase';
 
 export async function GET(request) {
   try {
@@ -22,7 +22,27 @@ export async function GET(request) {
 
     // Single article lookup mode (for shared links)
     if (articleId) {
-      // First: Check Supabase for saved article
+      // Check Supabase for approved article with AI content
+      if (isSupabaseConfigured()) {
+        const articleWithAI = await getArticleWithAI(articleId, false); // public view
+        if (articleWithAI) {
+          return NextResponse.json({
+            success: true,
+            source: 'database',
+            article: articleWithAI,
+            hasAI: !!articleWithAI.aiContent?.interpretation
+          });
+        }
+
+        // If Supabase configured but article not found/approved
+        return NextResponse.json({
+          success: false,
+          error: 'Article not found or not yet approved',
+          message: 'This reflection is pending review or no longer available'
+        }, { status: 404 });
+      }
+
+      // Fallback to old behavior only if Supabase not configured (dev mode)
       const savedArticle = await getArticleById(articleId);
       if (savedArticle) {
         return NextResponse.json({
@@ -32,7 +52,7 @@ export async function GET(request) {
         });
       }
 
-      // Second: Search in current news feed
+      // Search in current news feed (dev mode only)
       const rawNews = await fetchCategorizedNews({ perCategory: 5, forAllSection: 20 });
       const allCurrentArticles = [
         ...rawNews.inspiration,
@@ -44,9 +64,7 @@ export async function GET(request) {
 
       const foundArticle = allCurrentArticles.find(a => a.id === articleId);
       if (foundArticle) {
-        // Auto-save for future access (fire and forget)
         autoSaveArticle(foundArticle).catch(() => {});
-
         return NextResponse.json({
           success: true,
           source: 'newsapi',
@@ -54,7 +72,6 @@ export async function GET(request) {
         });
       }
 
-      // Article not found anywhere
       return NextResponse.json({
         success: false,
         error: 'Article not found',
@@ -62,9 +79,9 @@ export async function GET(request) {
       }, { status: 404 });
     }
 
-    // Try Supabase first for curated content
+    // Try Supabase first for approved articles with AI content
     if (isSupabaseConfigured()) {
-      const dbArticles = await getApprovedArticles({ limit: limit * 2 });
+      const dbArticles = await getApprovedArticlesWithAI({ limit: limit * 2 });
 
       if (dbArticles.length > 0) {
         // We have curated articles - use them

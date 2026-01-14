@@ -12,9 +12,7 @@ export default function NewsDetailPage() {
   const [news, setNews] = useState(null);
   const [whatHappened, setWhatHappened] = useState(null);
   const [interpretation, setInterpretation] = useState(null);
-  const [relevantPassages, setRelevantPassages] = useState([]);
   const [inlineCitations, setInlineCitations] = useState([]);
-  const [executiveSummary, setExecutiveSummary] = useState(null);
   const [quranicPerspective, setQuranicPerspective] = useState(null);
   const [quranVerse, setQuranVerse] = useState(null);
   const [fromCache, setFromCache] = useState(false);
@@ -22,26 +20,36 @@ export default function NewsDetailPage() {
   const [isLoadingInterpretation, setIsLoadingInterpretation] = useState(false);
   const [error, setError] = useState(null);
 
-  // Fetch news and then interpretation
+  // Fetch news and interpretation
   useEffect(() => {
     const fetchData = async () => {
       setIsLoadingNews(true);
 
       try {
-        // Direct article lookup by ID (checks Supabase first, then NewsAPI)
-        // Articles are auto-saved on first view for link persistence
+        // Fetch article (checks Supabase for approved content first)
         const newsResponse = await fetch(`/api/news?id=${encodeURIComponent(params.id)}`);
         const newsData = await newsResponse.json();
 
         let article = newsData.article || null;
 
         if (!newsData.success || !article) {
-          setError('This article is no longer available. It may have been removed from the news feed.');
-        } else {
-          setNews(article);
-          setIsLoadingNews(false);
+          setError(newsData.message || 'This article is no longer available.');
+          return;
+        }
 
-          // Now fetch the interpretation
+        setNews(article);
+        setIsLoadingNews(false);
+
+        // Check if article has stored AI content (from approved database)
+        if (article.aiContent?.interpretation) {
+          // Use stored AI content - no need to generate
+          setWhatHappened(article.aiContent.whatHappened);
+          setInterpretation(article.aiContent.interpretation);
+          setInlineCitations(article.aiContent.inlineCitations || []);
+          setQuranicPerspective(article.aiContent.quranicPerspective || null);
+          setFromCache(true);
+        } else {
+          // Fallback: Generate interpretation on-the-fly (dev mode)
           setIsLoadingInterpretation(true);
           const interpretResponse = await fetch('/api/interpret', {
             method: 'POST',
@@ -60,11 +68,8 @@ export default function NewsDetailPage() {
           if (interpretData.success) {
             setWhatHappened(interpretData.whatHappened);
             setInterpretation(interpretData.interpretation);
-            setRelevantPassages(interpretData.relevantPassages || []);
             setInlineCitations(interpretData.inlineCitations || []);
-            setExecutiveSummary(interpretData.executiveSummary || null);
             setQuranicPerspective(interpretData.quranicPerspective || null);
-            setQuranVerse(interpretData.quranVerse || null);
             setFromCache(interpretData.fromCache || false);
           } else {
             setError('Failed to generate interpretation');
@@ -204,9 +209,7 @@ export default function NewsDetailPage() {
       {/* Spiritual Interpretation */}
       <SpiritualInterpretation
         whatHappened={whatHappened}
-        executiveSummary={executiveSummary}
         interpretation={interpretation || ''}
-        relevantPassages={relevantPassages}
         inlineCitations={inlineCitations}
         quranicPerspective={quranicPerspective}
         isLoading={isLoadingInterpretation}

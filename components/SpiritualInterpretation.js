@@ -76,9 +76,7 @@ function ParsedInterpretation({ text, citations = [], onCitationClick }) {
 
 export default function SpiritualInterpretation({
   whatHappened,
-  executiveSummary,
   interpretation,
-  relevantPassages = [],
   inlineCitations = [],
   quranicPerspective = null,
   isLoading = false,
@@ -88,18 +86,12 @@ export default function SpiritualInterpretation({
   const [showBookViewer, setShowBookViewer] = useState(false);
   const [showCitationModal, setShowCitationModal] = useState(false);
 
-  // Handle citation click - try BookViewerPanel first, fallback to CitationModal
+  // Handle citation click - show CitationModal directly
+  // (BookViewerPanel requires CORS setup on Islamic Demo - disabled for now)
   const handleCitationClick = (passage) => {
     setSelectedPassage(passage);
-    // If passage has a bookSlug, try to open in BookViewerPanel first
-    if (passage.bookSlug) {
-      setShowBookViewer(true);
-      setShowCitationModal(false);
-    } else {
-      // No bookSlug available, show CitationModal directly
-      setShowBookViewer(false);
-      setShowCitationModal(true);
-    }
+    setShowBookViewer(false);
+    setShowCitationModal(true);
   };
 
   // Handle fallback from BookViewerPanel to CitationModal
@@ -151,19 +143,6 @@ export default function SpiritualInterpretation({
         </div>
       )}
 
-      {/* Executive Summary Section - "In Brief" */}
-      {executiveSummary && (
-        <div className="bg-gold/5 rounded-xl p-5 border border-gold/20">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="text-lg">&#128161;</span>
-            <h3 className="text-sm font-medium text-gold uppercase tracking-wide">In Brief</h3>
-          </div>
-          <p className="text-cream font-medium text-lg leading-relaxed spiritual-text italic">
-            "{executiveSummary}"
-          </p>
-        </div>
-      )}
-
       {/* Spiritual Reflection Section */}
       <div className="bg-dark-card rounded-xl p-6 border border-gold/20">
         {/* Header */}
@@ -183,33 +162,6 @@ export default function SpiritualInterpretation({
             onCitationClick={handleCitationClick}
           />
         </div>
-
-        {/* Related Teachings (if any) - Now with clickable citations */}
-        {relevantPassages.length > 0 && (
-          <div className="mt-8 pt-6 border-t border-gold/10">
-            <h4 className="text-sm font-medium text-gold mb-4 flex items-center gap-2">
-              <span>&#128214;</span> Wisdom from Maulana's Books
-            </h4>
-            <div className="space-y-4">
-              {relevantPassages.map((passage, index) => (
-                <blockquote key={index} className="passage-text text-cream/70 border-l-2 border-gold/30 pl-4">
-                  "{passage.content}"
-                  <footer className="text-xs text-cream/50 mt-2 not-italic">
-                    — From:{' '}
-                    <button
-                      onClick={() => handleCitationClick(passage)}
-                      className="text-gold/70 hover:text-gold hover:underline transition-colors cursor-pointer inline-flex items-center gap-1"
-                      title="Click to view full passage and source"
-                    >
-                      {passage.bookName || passage.source}
-                      <span className="text-xs">📖</span>
-                    </button>
-                  </footer>
-                </blockquote>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Footer */}
         <div className="mt-6 pt-4 border-t border-gold/10 flex items-center justify-between">
